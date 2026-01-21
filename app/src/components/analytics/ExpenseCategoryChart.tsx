@@ -17,15 +17,15 @@ const ExpenseCategoryChart: React.FC<ExpenseCategoryChartProps> = ({ data }) => 
     }
 
     return (
-        <div className="bg-white p-8 rounded-[2.5rem] border border-slate-100 shadow-sm col-span-1 lg:col-span-2">
-            <h3 className="text-xl font-black text-slate-900 mb-8 flex items-center gap-3">
+        <div className="bg-white p-6 rounded-[1rem] border border-slate-100 shadow-sm col-span-1 lg:col-span-2">
+            <h3 className="text-xl font-bold text-slate-900 mb-6 flex items-center gap-3">
                 Spending by Category
-                <span className="text-[10px] bg-slate-100 text-slate-400 px-2 py-1 rounded-lg uppercase tracking-widest font-black">Expense</span>
+                {/* <span className="text-[10px] bg-slate-100 text-slate-400 px-2 py-1 rounded-lg uppercase tracking-widest font-black">Expense</span> */}
             </h3>
 
-            <div className="flex flex-col md:flex-row items-center gap-12">
+            <div className="flex flex-col md:flex-row items-center gap-10">
                 {/* SVG Pie Chart */}
-                <div className="relative w-64 h-64 shrink-0">
+                <div className="relative w-52 h-52 shrink-0">
                     <svg viewBox="-1 -1 2 2" className="w-full h-full -rotate-90">
                         {data.map((slice, index) => {
                             const [startX, startY] = getCoordinatesForPercent(cumulativePercent);
@@ -43,9 +43,9 @@ const ExpenseCategoryChart: React.FC<ExpenseCategoryChartProps> = ({ data }) => 
                     </svg>
                     {/* Center Hole for Donut Effect */}
                     <div className="absolute inset-0 flex items-center justify-center">
-                        <div className="w-32 h-32 bg-white rounded-full shadow-inner flex flex-col items-center justify-center">
-                            <span className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Total</span>
-                            <span className="text-xl font-black text-slate-900">${total.toLocaleString()}</span>
+                        <div className="w-34 h-34 bg-white rounded-full shadow-inner flex flex-col items-center justify-center">
+                            <span className="text-[8px] font-black text-slate-400 uppercase tracking-widest">Total</span>
+                            <span className="text-lg font-black text-slate-900">${total.toLocaleString()}</span>
                         </div>
                     </div>
                 </div>

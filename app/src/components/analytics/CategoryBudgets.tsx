@@ -14,17 +14,17 @@ const CategoryBudgets: React.FC<CategoryBudgetsProps> = ({ onAddClick }) => {
     const { categories } = useCategories();
 
     return (
-        <div className="bg-white p-8 rounded-[2.5rem] border border-slate-100 shadow-sm h-fit">
-            <div className="flex items-center justify-between mb-8">
+        <div className="bg-white p-5 rounded-[0.5rem] border border-slate-100 shadow-sm ">
+            <div className="flex items-center justify-between mb-3">
                 <div className="flex items-center gap-3">
                     <div className="w-10 h-10 bg-indigo-50 text-indigo-600 rounded-2xl flex items-center justify-center">
                         <Target size={20} />
                     </div>
-                    <h3 className="text-lg font-black text-slate-900">Category Budgets</h3>
+                    <h3 className="text-md font-bold text-slate-900">Category Budgets</h3>
                 </div>
                 <button
                     onClick={onAddClick}
-                    className="p-2 bg-indigo-600 text-white rounded-xl hover:bg-indigo-700 transition-all shadow-lg shadow-indigo-100 active:scale-95"
+                    className="p-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition-all shadow-lg shadow-indigo-100 active:scale-95"
                 >
                     <Plus size={18} />
                 </button>
@@ -37,7 +37,7 @@ const CategoryBudgets: React.FC<CategoryBudgetsProps> = ({ onAddClick }) => {
 
                     return (
                         <div key={budget.id} className="group">
-                            <div className="flex items-center justify-between mb-3">
+                            <div className="flex items-center justify-between">
                                 <div>
                                     <h4 className="font-bold text-slate-900 text-sm">{category?.name || 'Unknown'}</h4>
                                     <p className="text-[11px] font-bold text-slate-400">
@@ -81,11 +81,11 @@ const CategoryBudgets: React.FC<CategoryBudgetsProps> = ({ onAddClick }) => {
                 })}
 
                 {budgets.length === 0 && (
-                    <div className="text-center py-12 px-6 border-2 border-dashed border-slate-100 rounded-[2rem]">
-                        <p className="text-slate-400 text-[13px] font-bold">No budgets set</p>
+                    <div className="text-center py-8 px-6 border-2 border-dashed border-slate-100 rounded-[1rem]">
+                        <p className="text-slate-500 text-[11px] font-bold">No budgets set</p>
                         <button
                             onClick={onAddClick}
-                            className="text-indigo-600 text-[11px] font-black uppercase tracking-widest mt-2 hover:underline"
+                            className="text-indigo-600 text-[10px] font-black uppercase tracking-widest hover:underline"
                         >
                             Set your first budget
                         </button>

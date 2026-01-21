@@ -19,15 +19,15 @@ const TopCategories: React.FC<TopCategoriesProps> = ({ data }) => {
     const totalAmount = data.reduce((acc, curr) => acc + curr.amount, 0);
 
     return (
-        <div className="bg-white p-8 rounded-[2.5rem] border border-slate-100 shadow-sm">
-            <div className="flex items-center gap-3 mb-8">
+        <div className="bg-white p-5 rounded-[1rem] border border-slate-100 shadow-sm">
+            <div className="flex items-center gap-3 mb-5">
                 <div className="w-10 h-10 bg-indigo-50 text-indigo-600 rounded-2xl flex items-center justify-center">
                     <BarChart3 size={20} />
                 </div>
-                <h3 className="text-lg font-black text-slate-900">Top Categories</h3>
+                <h3 className="text-lg font-bold text-slate-900">Top Categories</h3>
             </div>
 
-            <div className="space-y-8">
+            <div className="space-y-5">
                 {data.map((cat, index) => {
                     const percentage = totalAmount > 0 ? (cat.amount / totalAmount) * 100 : 0;
 

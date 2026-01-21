@@ -34,25 +34,25 @@ const SummaryCard: React.FC<SummaryCardProps> = ({ title, amount, type }) => {
     }
 
     return (
-        <div className={`p-8 rounded-[2.5rem] border border-slate-100 shadow-sm bg-white relative overflow-hidden group hover:shadow-md transition-all`}>
+        <div className={`p-6 rounded-[1rem] border border-slate-200 shadow-sm bg-white relative overflow-hidden group hover:shadow-md transition-all`}>
             {/* Background Accent */}
-            <div className={`absolute top-0 right-0 w-32 h-32 ${bgColor} rounded-full -mr-16 -mt-16 blur-3xl opacity-50 group-hover:opacity-100 transition-opacity`} />
+            <div className={`absolute top-0 right-0 w-24 h-24 ${bgColor} rounded-full -mr-12 -mt-12 blur-2xl opacity-50 group-hover:opacity-100 transition-opacity`} />
 
-            <div className="relative flex items-center justify-between mb-8">
-                <div className={`w-12 h-12 ${bgColor} ${textColor} rounded-2xl flex items-center justify-center`}>
-                    {icon}
+            <div className="relative flex items-center justify-between mb-2">
+                <div className={`w-11 h-11 ${bgColor} ${textColor} rounded-2xl flex items-center justify-center`}>
+                    {React.cloneElement(icon as React.ReactElement<{ size?: number }>, { size: 18 })}
                 </div>
                 {arrow}
             </div>
 
             <div className="relative">
-                <h4 className="text-slate-500 text-[13px] font-bold uppercase tracking-widest mb-1.5">{title}</h4>
+                <h4 className="text-slate-500 text-[12px] font-bold uppercase tracking-widest mb-1">{title}</h4>
                 <div className="flex items-end justify-between">
-                    <span className={`text-3xl font-black ${type === 'balance' ? 'text-slate-900' : textColor} tracking-tighter`}>
+                    <span className={`text-[24px] font-black ${type === 'balance' ? 'text-slate-900' : textColor} tracking-tight leading-none`}>
                         ${amount.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
                     </span>
                 </div>
-                <p className="text-slate-400 text-[11px] font-bold uppercase tracking-widest mt-2">Current period</p>
+                <p className="text-slate-400 text-[10px] font-bold uppercase tracking-widest mt-2 opacity-60">Current period</p>
             </div>
         </div>
     );
