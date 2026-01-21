@@ -54,8 +54,8 @@ const Sidebar = () => {
                             key={item.id}
                             href={item.href}
                             className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-200 group ${isActive
-                                    ? 'bg-gradient-to-r from-indigo-600 to-violet-600 text-white shadow-lg shadow-indigo-200/50'
-                                    : 'text-slate-500 hover:bg-slate-50 hover:text-indigo-600'
+                                ? 'bg-gradient-to-r from-indigo-600 to-violet-600 text-white shadow-lg shadow-indigo-200/50'
+                                : 'text-slate-500 hover:bg-slate-50 hover:text-indigo-600'
                                 }`}
                         >
                             <Icon size={20} className={isActive ? 'text-white' : 'group-hover:text-indigo-600'} />

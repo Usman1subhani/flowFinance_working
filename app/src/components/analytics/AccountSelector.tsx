@@ -18,8 +18,8 @@ const AccountSelector: React.FC<AccountSelectorProps> = ({ selectedAccountId, on
             <div
                 onClick={() => onSelect('all')}
                 className={`min-w-[240px] p-5 rounded-3xl border transition-all duration-300 cursor-pointer ${selectedAccountId === 'all'
-                        ? 'bg-white border-indigo-500 shadow-xl shadow-indigo-100/30'
-                        : 'bg-white border-slate-100 hover:border-slate-200 shadow-sm opacity-60 grayscale-[0.5]'
+                    ? 'bg-white border-indigo-500 shadow-xl shadow-indigo-100/30'
+                    : 'bg-white border-slate-100 hover:border-slate-200 shadow-sm opacity-60 grayscale-[0.5]'
                     }`}
             >
                 <div className="flex items-center justify-between mb-4">
@@ -44,8 +44,8 @@ const AccountSelector: React.FC<AccountSelectorProps> = ({ selectedAccountId, on
                     key={acc.id}
                     onClick={() => onSelect(acc.id)}
                     className={`min-w-[240px] p-5 rounded-3xl border transition-all duration-300 cursor-pointer ${selectedAccountId === acc.id
-                            ? 'bg-white border-indigo-500 shadow-xl shadow-indigo-100/30'
-                            : 'bg-white border-slate-100 hover:border-slate-200 shadow-sm opacity-60 grayscale-[0.5]'
+                        ? 'bg-white border-indigo-500 shadow-xl shadow-indigo-100/30'
+                        : 'bg-white border-slate-100 hover:border-slate-200 shadow-sm opacity-60 grayscale-[0.5]'
                         }`}
                 >
                     <div className="flex items-center justify-between mb-4">

@@ -1,51 +1,94 @@
+'use client';
+
 import React from 'react';
 import { TrendingUp, TrendingDown } from 'lucide-react';
 import { useTransactions } from '../../context/TransactionContext';
 import { useCategories } from '../../context/CategoryContext';
+import { useBudgets } from '../../context/BudgetContext';
 
-const RecentTransactions = () => {
+interface RecentTransactionsProps {
+    selectedAccountId?: string;
+}
+
+const RecentTransactions: React.FC<RecentTransactionsProps> = ({ selectedAccountId = 'all' }) => {
     const { transactions } = useTransactions();
     const { categories } = useCategories();
+    const { budgets } = useBudgets();
 
-    // Show only the latest 4-5 transactions
-    const displayTransactions = transactions.slice(0, 5);
+    // Filter transactions based on selected account and show only the latest 5
+    const displayTransactions = transactions
+        .filter(t => selectedAccountId === 'all' || t.accountId === selectedAccountId)
+        .slice(0, 5);
 
     return (
-        <div className="bg-white p-6 md:p-8 rounded-2xl border border-slate-100 shadow-sm grow flex flex-col">
-            <h3 className="heading-2 mb-6">Recent Transactions</h3>
+        <div className="bg-white p-6 md:p-8 rounded-[1rem] border border-black/10 shadow-sm grow flex flex-col">
+            <h3 className="text-[18px] font-bold text-black mb-5">Recent Transactions</h3>
 
-            <div className="space-y-4 flex-1 overflow-auto pr-1">
+            <div className="space-y-1 flex-1 overflow-auto pr-5 ">
                 {displayTransactions.map((t) => {
                     const category = categories.find(c => c.id === t.categoryId);
+                    const budget = budgets.find(b => b.categoryId === t.categoryId);
+
+                    // Calculate progress if budget exists
+                    let progress = 0;
+                    if (budget && budget.amount > 0) {
+                        const spentInCategory = transactions
+                            .filter(tx => tx.categoryId === t.categoryId && tx.type === 'expense')
+                            .reduce((acc, tx) => acc + tx.amount, 0);
+                        progress = (spentInCategory / budget.amount) * 100;
+                    }
+
+                    const getProgressColor = (pct: number) => {
+                        if (pct > 95) return 'bg-rose-500';
+                        if (pct > 50) return 'bg-amber-500';
+                        return 'bg-emerald-500';
+                    };
 
                     return (
-                        <div key={t.id} className="flex items-center justify-between group cursor-pointer hover:bg-slate-50 p-2 rounded-xl transition-all -mx-2">
-                            <div className="flex items-center gap-3.5">
-                                <div className={`w-10 h-10 rounded-xl flex items-center justify-center ${t.type === 'income' ? 'bg-emerald-50 text-emerald-600' : 'bg-rose-50 text-rose-600'
-                                    } transition-colors`}>
-                                    {t.type === 'income' ? <TrendingUp size={18} /> : <TrendingDown size={18} />}
-                                </div>
-                                <div>
-                                    <h4 className="font-semibold text-slate-900 text-[14px] tracking-tight">{t.title}</h4>
-                                    <div className="flex items-center gap-2 mt-0.5">
-                                        <span className="text-[11px] font-medium text-slate-500">
-                                            {new Date(t.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
-                                        </span>
-                                        {category && (
-                                            <span
-                                                className="px-1.5 py-0.5 rounded text-[9px] font-bold uppercase tracking-wider"
-                                                style={{ backgroundColor: `${category.color}15`, color: category.color }}
-                                            >
-                                                {category.name}
+                        <div key={t.id} className="flex flex-col gap-2 group cursor-pointer hover:bg-slate-50 p-3 rounded-2xl transition-all -mx-3">
+                            <div className="flex items-center justify-between">
+                                <div className="flex items-center gap-4">
+                                    <div className={`w-11 h-11 rounded-2xl flex items-center justify-center text-white shadow-md ${t.type === 'income' ? 'bg-emerald-500 shadow-emerald-100' : 'bg-rose-500 shadow-rose-100'
+                                        }`}>
+                                        {t.type === 'income' ? <TrendingUp size={20} /> : <TrendingDown size={20} />}
+                                    </div>
+                                    <div>
+                                        <h4 className="font-bold text-slate-900 text-[15px] tracking-tight">{t.title}</h4>
+                                        <div className="flex items-center gap-2 mt-0.5">
+                                            <span className="text-[12px] font-bold text-slate-400">
+                                                {new Date(t.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}
                                             </span>
-                                        )}
+                                            {category && (
+                                                <span
+                                                    className="px-2 py-0.5 rounded-lg text-[10px] font-black uppercase tracking-wider bg-slate-100 text-slate-500"
+                                                >
+                                                    {category.name}
+                                                </span>
+                                            )}
+                                        </div>
                                     </div>
                                 </div>
+                                <div className={`font-black text-[16px] tracking-tight ${t.type === 'income' ? 'text-emerald-500' : 'text-slate-900'
+                                    }`}>
+                                    {t.type === 'income' ? '+' : '-'}${t.amount.toLocaleString(undefined, { minimumFractionDigits: 2 })}
+                                </div>
                             </div>
-                            <div className={`font-bold text-[15px] tracking-tight ${t.type === 'income' ? 'text-emerald-500' : 'text-rose-500'
-                                }`}>
-                                {t.type === 'income' ? '+' : '-'}${t.amount.toLocaleString(undefined, { minimumFractionDigits: 2 })}
-                            </div>
+
+                            {/* Budget Progress Bar */}
+                            {t.type === 'expense' && budget && (
+                                <div className="ml-[3.75rem] mt-1 pr-2">
+                                    <div className="flex justify-between items-center mb-1">
+                                        <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Growth Budget</span>
+                                        <span className="text-[10px] font-bold text-slate-500">{Math.round(progress)}%</span>
+                                    </div>
+                                    <div className="h-1.5 w-full bg-slate-100 rounded-full overflow-hidden">
+                                        <div
+                                            className={`h-full transition-all duration-1000 ${getProgressColor(progress)}`}
+                                            style={{ width: `${Math.min(progress, 100)}%` }}
+                                        />
+                                    </div>
+                                </div>
+                            )}
                         </div>
                     );
                 })}

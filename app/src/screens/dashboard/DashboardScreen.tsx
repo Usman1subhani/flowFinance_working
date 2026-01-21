@@ -12,6 +12,7 @@ import { CreditCard, Wallet2 } from 'lucide-react';
 
 const DashboardScreen = () => {
     const { accounts } = useAccounts();
+    const [selectedAccountId, setSelectedAccountId] = useState('all');
     const [isModalOpen, setIsModalOpen] = useState(false);
 
     return (
@@ -27,8 +28,10 @@ const DashboardScreen = () => {
                     balance={`$${accounts.reduce((acc: number, curr: Account) => acc + parseFloat(curr.balance.replace(/[$,]/g, '')), 0).toLocaleString()}`}
                     currency="USD"
                     icon={<Wallet2 size={24} />}
-                    iconBg="bg-slate-400"
+                    iconBg="#94a3b8"
                     isHidden={true}
+                    isActive={selectedAccountId === 'all'}
+                    onClick={() => setSelectedAccountId('all')}
                 />
 
                 {accounts.map((account) => (
@@ -39,17 +42,18 @@ const DashboardScreen = () => {
                         currency={account.currency}
                         icon={<CreditCard size={24} />}
                         iconBg={account.color}
-                        isActive={false} // You can add logic to highlight based on selection if needed
+                        isActive={selectedAccountId === account.id}
+                        onClick={() => setSelectedAccountId(account.id)}
                     />
                 ))}
             </div>
 
             {/* Summary Stats */}
-            <SummaryCards />
+            <SummaryCards selectedAccountId={selectedAccountId} />
 
             {/* Bottom Grid */}
-            <div className="flex flex-col lg:flex-row gap-8">
-                <RecentTransactions />
+            <div className="flex flex-col md:flex-row gap-8">
+                <RecentTransactions selectedAccountId={selectedAccountId} />
                 <QuickActions />
             </div>
 

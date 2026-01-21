@@ -11,19 +11,19 @@ const DashboardHeader: React.FC<DashboardHeaderProps> = ({ onQuickAdd }) => {
     return (
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-10">
             <div>
-                <h1 className="heading-1">Dashboard</h1>
-                <p className="text-sub mt-1">Welcome back! Here&apos;s your financial overview</p>
-                <p className="text-[10px] text-slate-400 mt-2 uppercase tracking-[0.15em] font-bold">Jan 12, 2026 — Present</p>
+                <h1 className="h1-dashboard text-[24px] font-black text-slate-700" >Dashboard</h1>
+                <p className="subtext-dashboard mt-1 text-[15px] font-black text-slate-500 ">Welcome back! Here&apos;s your financial overview</p>
+                <p className="text-[11px] font-black text-slate-400 uppercase tracking-widest mt-2">Jan 12, 2026 — Present</p>
             </div>
 
             <div className="flex items-center gap-3">
-                <button className="flex items-center gap-2 px-5 py-2.5 bg-white border border-slate-200 rounded-xl text-slate-600 font-medium text-sm hover:bg-slate-50 transition-all shadow-sm">
+                <button className="flex items-center gap-2 px-6 py-3 bg-gray-400 text-white rounded-[0.5rem] font-bold text-sm">
                     <Lock size={16} />
                     Close Month
                 </button>
                 <button
                     onClick={onQuickAdd}
-                    className="btn-primary flex items-center gap-2"
+                    className="flex items-center gap-2 px-6 py-3 bg-indigo-600 text-white rounded-[0.5rem] font-bold text-sm hover:bg-indigo-700 transition-all shadow-lg shadow-indigo-100 active:scale-95"
                 >
                     <Plus size={18} />
                     Quick Add
