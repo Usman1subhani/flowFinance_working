@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import { Search, ChevronDown, Calendar, Filter } from 'lucide-react';
+import { Search, ChevronDown, Filter, X } from 'lucide-react';
 import { useAccounts } from '../../context/AccountContext';
 import { useCategories } from '../../context/CategoryContext';
 
@@ -29,9 +29,29 @@ const TransactionFilters: React.FC<TransactionFiltersProps> = ({
 
     return (
         <div className="bg-white p-6 md:p-8 rounded-2xl border border-slate-100 shadow-sm mb-8">
-            <div className="flex items-center gap-2 mb-6">
-                <Filter size={18} className="text-indigo-600" />
-                <h3 className="text-lg font-bold text-slate-900 tracking-tight">Filters</h3>
+            <div className="flex items-center justify-between mb-8">
+                <div className="flex items-center gap-3">
+                    <Filter size={18} className="text-slate-400" />
+                    <h3 className="text-lg font-bold text-slate-900 tracking-tight">Filters</h3>
+                    <span className="px-2 py-0.5 bg-indigo-50 text-indigo-600 rounded-md text-[10px] font-black uppercase tracking-wider">
+                        1 Active
+                    </span>
+                </div>
+                <button
+                    onClick={() => {
+                        onSearchChange('');
+                        onAccountChange('all');
+                        onCategoryChange('all');
+                        onDateFromChange('');
+                        onDateToChange('');
+                        onMinAmountChange('');
+                        onMaxAmountChange('');
+                    }}
+                    className="flex items-center gap-2 text-[11px] font-black text-slate-400 hover:text-rose-500 transition-colors uppercase tracking-widest"
+                >
+                    <X size={14} />
+                    Clear All
+                </button>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">

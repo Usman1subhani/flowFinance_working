@@ -53,28 +53,28 @@ const TransactionsScreen = () => {
     };
 
     return (
-        <div className="max-w-6xl mx-auto space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-500">
+        <div className="space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-500">
             {/* Header section */}
             <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
                 <div>
-                    <h1 className="text-3xl font-black text-slate-900 tracking-tight">Transactions</h1>
+                    <h1 className="heading-2 text-[24px] font-black text-slate-900">Transactions</h1>
                     <p className="text-slate-500 font-medium mt-1">Track all your income and expenses</p>
                 </div>
 
-                <div className="flex items-center gap-3">
+                <div className="flex items-center gap-2">
                     <button
                         onClick={() => handleOpenModal('income')}
-                        className="flex-1 md:flex-none flex items-center justify-center gap-2 px-6 py-3.5 bg-emerald-500 hover:bg-emerald-600 text-white rounded-2xl font-bold transition-all shadow-lg shadow-emerald-100 active:scale-95"
+                        className="flex items-center gap-2 px-4 py-2 bg-emerald-500 hover:bg-emerald-600 text-white rounded-lg font-bold text-sm transition-all shadow-md shadow-emerald-100 active:scale-95"
                     >
-                        <Plus size={18} />
-                        <span>Income</span>
+                        <Plus size={16} />
+                        Income
                     </button>
                     <button
                         onClick={() => handleOpenModal('expense')}
-                        className="flex-1 md:flex-none flex items-center justify-center gap-2 px-6 py-3.5 bg-rose-500 hover:bg-rose-600 text-white rounded-2xl font-bold transition-all shadow-lg shadow-rose-100 active:scale-95"
+                        className="flex items-center gap-2 px-4 py-2 bg-rose-500 hover:bg-rose-600 text-white rounded-lg font-bold text-sm transition-all shadow-md shadow-rose-100 active:scale-95"
                     >
-                        <Plus size={18} />
-                        <span>Expense</span>
+                        <Plus size={16} />
+                        Expense
                     </button>
                 </div>
             </div>
@@ -90,9 +90,9 @@ const TransactionsScreen = () => {
                 onMaxAmountChange={setMaxAmount}
             />
 
-            {/* Transactions List */}
-            <div className="space-y-4">
-                <div className="flex items-center justify-between mb-4 px-2">
+            {/* Transactions List Container */}
+            <div className="bg-white p-6 md:p-8 rounded-2xl border border-slate-100 shadow-sm">
+                <div className="flex items-center justify-between mb-8 px-2">
                     <h2 className="text-sm font-black text-slate-600 uppercase tracking-widest flex items-center gap-2">
                         {filteredTransactions.length} Transactions Found
                     </h2>
@@ -102,7 +102,7 @@ const TransactionsScreen = () => {
                     </button>
                 </div>
 
-                <div className="space-y-3">
+                <div className="space-y-4">
                     {filteredTransactions.length > 0 ? (
                         filteredTransactions.map((tx) => (
                             <TransactionItem
@@ -113,7 +113,7 @@ const TransactionsScreen = () => {
                             />
                         ))
                     ) : (
-                        <div className="bg-white p-20 rounded-3xl border border-dashed border-slate-200 flex flex-col items-center justify-center text-center">
+                        <div className="py-20 flex flex-col items-center justify-center text-center">
                             <div className="w-16 h-16 bg-slate-50 text-slate-300 rounded-2xl flex items-center justify-center mb-4">
                                 <FilterIcon size={32} />
                             </div>
