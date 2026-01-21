@@ -15,6 +15,7 @@ export interface Account {
 interface AccountContextType {
     accounts: Account[];
     addAccount: (account: Omit<Account, 'id' | 'balance'>) => void;
+    updateAccount: (id: string, updates: Partial<Omit<Account, 'id'>>) => void;
     deleteAccount: (id: string) => void;
 }
 
@@ -51,12 +52,16 @@ export const AccountProvider = ({ children }: { children: ReactNode }) => {
         setAccounts((prev) => [...prev, account]);
     };
 
+    const updateAccount = (id: string, updates: Partial<Omit<Account, 'id'>>) => {
+        setAccounts((prev) => prev.map((acc) => (acc.id === id ? { ...acc, ...updates } : acc)));
+    };
+
     const deleteAccount = (id: string) => {
         setAccounts((prev) => prev.filter((acc) => acc.id !== id));
     };
 
     return (
-        <AccountContext.Provider value={{ accounts, addAccount, deleteAccount }}>
+        <AccountContext.Provider value={{ accounts, addAccount, updateAccount, deleteAccount }}>
             {children}
         </AccountContext.Provider>
     );

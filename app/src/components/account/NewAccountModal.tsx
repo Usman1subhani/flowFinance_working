@@ -53,8 +53,8 @@ const NewAccountModal: React.FC<NewAccountModalProps> = ({ isOpen, onClose }) =>
                 onClick={(e) => e.stopPropagation()}
             >
                 {/* Header */}
-                <div className="p-6 md:p-8 pb-4 flex items-center justify-between">
-                    <h3 className="heading-2">New Account</h3>
+                <div className="p-6 md:p-8 pb-4 rounded-t-2xl flex items-center justify-between">
+                    <h3 className="heading-2 text-[20px] font-black text-slate-700">New Account</h3>
                     <button
                         onClick={onClose}
                         className="p-1.5 hover:bg-slate-100 rounded-lg text-slate-400 hover:text-slate-600 transition-colors"
