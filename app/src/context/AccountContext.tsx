@@ -17,6 +17,7 @@ interface AccountContextType {
     addAccount: (account: Omit<Account, 'id' | 'balance'>) => void;
     updateAccount: (id: string, updates: Partial<Omit<Account, 'id'>>) => void;
     deleteAccount: (id: string) => void;
+    setAccounts: React.Dispatch<React.SetStateAction<Account[]>>;
 }
 
 const AccountContext = createContext<AccountContextType | undefined>(undefined);
@@ -61,7 +62,7 @@ export const AccountProvider = ({ children }: { children: ReactNode }) => {
     };
 
     return (
-        <AccountContext.Provider value={{ accounts, addAccount, updateAccount, deleteAccount }}>
+        <AccountContext.Provider value={{ accounts, addAccount, updateAccount, deleteAccount, setAccounts }}>
             {children}
         </AccountContext.Provider>
     );

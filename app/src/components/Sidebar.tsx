@@ -12,7 +12,8 @@ import {
     Tags,
     UserCircle,
     LogOut,
-    Wallet2
+    Wallet2,
+    TrendingUp
 } from 'lucide-react';
 
 const navItems = [
@@ -20,8 +21,9 @@ const navItems = [
     { icon: Wallet, label: 'Accounts', id: 'accounts', href: '/accounts' },
     { icon: ArrowLeftRight, label: 'Transactions', id: 'transactions', href: '/transactions' },
     { icon: BarChart3, label: 'Analytics', id: 'analytics', href: '/analytics' },
-    { icon: History, label: 'History', id: 'history', href: '/history' },
     { icon: Tags, label: 'Categories', id: 'categories', href: '/categories' },
+    { icon: History, label: 'History', id: 'history', href: '/history' },
+    { icon: TrendingUp, label: 'Investments', id: 'investments', href: '/investments' },
     { icon: UserCircle, label: 'Profile', id: 'profile', href: '/profile' },
 ];
 

@@ -58,6 +58,7 @@ const AccountsScreen = () => {
             <NewAccountModal
                 isOpen={isModalOpen}
                 onClose={handleCloseModal}
+                editingAccount={editingAccount}
             />
         </div>
     );

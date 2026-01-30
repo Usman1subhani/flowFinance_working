@@ -42,10 +42,16 @@ const SummaryCards: React.FC<SummaryCardsProps> = ({ selectedAccountId = 'all' }
     const { accounts } = useAccounts();
 
     const stats = useMemo(() => {
-        const filteredTx = transactions.filter(tx => selectedAccountId === 'all' || tx.accountId === selectedAccountId);
         const filteredAccounts = accounts.filter(acc => selectedAccountId === 'all' || acc.id === selectedAccountId);
+        const filteredTx = transactions.filter(tx => selectedAccountId === 'all' || tx.accountId === selectedAccountId);
 
-        const currentBalance = filteredAccounts.reduce((acc, curr) => acc + parseFloat(curr.balance.replace(/[$,]/g, '')), 0);
+        const currentBalance = filteredAccounts.reduce((acc, curr) => {
+            const accTransactions = transactions.filter(tx => tx.accountId === curr.id);
+            const income = accTransactions.filter(tx => tx.type === 'income').reduce((sum, tx) => sum + tx.amount, 0);
+            const expense = accTransactions.filter(tx => tx.type === 'expense').reduce((sum, tx) => sum + tx.amount, 0);
+            const startBalance = parseFloat(curr.startingBalance.replace(/[$,]/g, '')) || 0;
+            return acc + (startBalance + income - expense);
+        }, 0);
 
         const now = new Date();
         const startOfMonth = new Date(now.getFullYear(), now.getMonth(), 1);
@@ -68,28 +74,28 @@ const SummaryCards: React.FC<SummaryCardsProps> = ({ selectedAccountId = 'all' }
             label: 'Current Balance',
             amount: stats.currentBalance,
             icon: <Wallet />,
-            bgColor: 'bg-indigo-50/50',
+            bgColor: 'bg-indigo-100/50',
             iconBgColor: 'bg-indigo-500'
         },
         {
             label: 'This Month Income',
             amount: stats.monthlyIncome,
             icon: <TrendingUp />,
-            bgColor: 'bg-emerald-50/50',
+            bgColor: 'bg-emerald-100/50',
             iconBgColor: 'bg-emerald-500'
         },
         {
             label: 'This Month Expenses',
             amount: stats.monthlyExpense,
             icon: <TrendingDown />,
-            bgColor: 'bg-rose-50/50',
+            bgColor: 'bg-rose-100/70',
             iconBgColor: 'bg-rose-500'
         },
         {
             label: 'Net This Month',
             amount: stats.netMonth,
             icon: <Target />,
-            bgColor: stats.netMonth >= 0 ? 'bg-emerald-50/50' : 'bg-rose-50/50',
+            bgColor: stats.netMonth >= 0 ? 'bg-emerald-100/50' : 'bg-rose-50/50',
             iconBgColor: stats.netMonth >= 0 ? 'bg-emerald-500' : 'bg-rose-500'
         },
     ];

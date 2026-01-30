@@ -43,7 +43,7 @@ const AccountCard: React.FC<AccountCardProps> = ({
     return (
         <div
             onClick={onClick}
-            className={`min-w-[280px] p-6 rounded-2xl border transition-all duration-300 bg-white cursor-pointer ${isActive
+            className={`min-w-[270px] p-6 rounded-[0.8rem] border transition-all duration-300 bg-white cursor-pointer ${isActive
                 ? 'border-transparent shadow-xl shadow-indigo-100/30'
                 : 'border-slate-100 hover:border-slate-200 shadow-sm'
                 }`}

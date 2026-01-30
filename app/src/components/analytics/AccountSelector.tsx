@@ -3,6 +3,7 @@
 import React from 'react';
 import { Wallet, Eye, EyeOff } from 'lucide-react';
 import { useAccounts, Account } from '../../context/AccountContext';
+import { useTransactions } from '../../context/TransactionContext';
 
 interface AccountSelectorProps {
     selectedAccountId: string | 'all';
@@ -11,7 +12,18 @@ interface AccountSelectorProps {
 
 const AccountSelector: React.FC<AccountSelectorProps> = ({ selectedAccountId, onSelect }) => {
     const { accounts } = useAccounts();
+    const { transactions } = useTransactions();
     const [isBalancesVisible, setIsBalancesVisible] = React.useState(true);
+
+    const calculateBalance = (account: Account) => {
+        const accTransactions = transactions.filter(tx => tx.accountId === account.id);
+        const income = accTransactions.filter(tx => tx.type === 'income').reduce((sum, tx) => sum + tx.amount, 0);
+        const expense = accTransactions.filter(tx => tx.type === 'expense').reduce((sum, tx) => sum + tx.amount, 0);
+        const startBalance = parseFloat(account.startingBalance.replace(/[$,]/g, '')) || 0;
+        return startBalance + income - expense;
+    };
+
+    const totalAssets = accounts.reduce((sum, acc) => sum + calculateBalance(acc), 0);
 
     return (
         <div className="flex items-center gap-4 overflow-x-auto pb-4 -mx-1 px-1 scrollbar-hide">
@@ -41,7 +53,7 @@ const AccountSelector: React.FC<AccountSelectorProps> = ({ selectedAccountId, on
                     <h4 className="text-slate-500 text-[12px] font-bold uppercase tracking-widest mb-1">All Accounts</h4>
                     <div className="flex items-baseline gap-2">
                         <span className="text-lg font-black text-slate-900 tracking-tight">
-                            {isBalancesVisible ? 'Total Assets' : '••••••'}
+                            {isBalancesVisible ? `$${totalAssets.toLocaleString(undefined, { minimumFractionDigits: 2 })}` : '••••••'}
                         </span>
                     </div>
                 </div>
@@ -80,7 +92,7 @@ const AccountSelector: React.FC<AccountSelectorProps> = ({ selectedAccountId, on
                         </h4>
                         <div className="flex items-baseline gap-2">
                             <span className="text-lg font-black text-slate-900 tracking-tight">
-                                {isBalancesVisible ? acc.balance : '••••••'}
+                                {isBalancesVisible ? `$${calculateBalance(acc).toLocaleString(undefined, { minimumFractionDigits: 2 })}` : '••••••'}
                             </span>
                             <span className="text-[9px] font-black text-slate-400 uppercase tracking-widest">{acc.currency}</span>
                         </div>

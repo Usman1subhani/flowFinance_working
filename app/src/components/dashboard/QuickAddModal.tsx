@@ -47,7 +47,7 @@ const QuickAddModal: React.FC<QuickAddModalProps> = ({ isOpen, onClose }) => {
             >
                 {/* Header */}
                 <div className="p-8 pb-4 flex items-center justify-between">
-                    <h3 className="text-2xl font-black text-slate-900 tracking-tight">Quick Add Transaction</h3>
+                    <h3 className="text-[18px] font-bold text-slate-900">Quick Add Transaction</h3>
                     <button
                         onClick={onClose}
                         className="p-2 hover:bg-slate-100 rounded-full text-slate-400 hover:text-slate-600 transition-colors"
@@ -57,7 +57,7 @@ const QuickAddModal: React.FC<QuickAddModalProps> = ({ isOpen, onClose }) => {
                 </div>
 
                 {/* Tabs */}
-                <div className="px-8 mb-8">
+                <div className="px-8 mb-4">
                     <div className="bg-slate-50 p-1.5 rounded-2xl flex gap-1">
                         <button
                             onClick={() => setActiveTab('expense')}
@@ -81,9 +81,9 @@ const QuickAddModal: React.FC<QuickAddModalProps> = ({ isOpen, onClose }) => {
                 </div>
 
                 {/* Form Content */}
-                <div className="px-8 pb-8 space-y-6">
+                <div className="px-8 pb-8 space-y-2">
                     <div className="space-y-2">
-                        <label className="text-[13px] font-black text-slate-900 uppercase tracking-wider px-1">Title</label>
+                        <label className="text-[12px] font-bold text-slate-900 uppercase tracking-wider px-1">Title</label>
                         <input
                             type="text"
                             value={title}
@@ -94,26 +94,26 @@ const QuickAddModal: React.FC<QuickAddModalProps> = ({ isOpen, onClose }) => {
                     </div>
 
                     <div className="space-y-2">
-                        <label className="text-[13px] font-black text-slate-900 uppercase tracking-wider px-1">Amount</label>
+                        <label className="text-[12px] font-bold text-slate-900 uppercase tracking-wider px-1">Amount</label>
                         <div className="relative">
                             <input
                                 type="number"
                                 value={amount}
                                 onChange={(e) => setAmount(e.target.value)}
                                 placeholder="0.00"
-                                className="w-full px-6 py-4 bg-slate-50 border border-slate-100 rounded-2xl text-slate-900 font-bold text-lg placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 transition-all text-slate-900"
+                                className="w-full px-6 py-4 bg-slate-50 border border-slate-100 rounded-2xl text-slate-900 font-bold text-[15px] placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 transition-all text-slate-900"
                             />
                         </div>
                     </div>
 
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <div className="space-y-2">
-                            <label className="text-[13px] font-black text-slate-900 uppercase tracking-wider px-1">Account</label>
+                            <label className="text-[12px] font-bold text-slate-900 uppercase tracking-wider px-1">Account</label>
                             <div className="relative">
                                 <select
                                     value={accountId}
                                     onChange={(e) => setAccountId(e.target.value)}
-                                    className="w-full appearance-none px-6 py-4 bg-slate-50 border border-slate-100 rounded-2xl text-slate-900 font-bold focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 transition-all cursor-pointer text-slate-900"
+                                    className="w-full appearance-none px-6 py-4 bg-slate-50 border border-slate-100 text-[13px] rounded-2xl text-slate-900 font-bold focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 transition-all cursor-pointer text-slate-900"
                                 >
                                     {accounts.map((account) => (
                                         <option key={account.id} value={account.id}>
@@ -127,12 +127,12 @@ const QuickAddModal: React.FC<QuickAddModalProps> = ({ isOpen, onClose }) => {
 
                         {activeTab === 'expense' && (
                             <div className="space-y-2">
-                                <label className="text-[13px] font-black text-slate-900 uppercase tracking-wider px-1">Category</label>
+                                <label className="text-[12px] font-bold text-slate-900 uppercase tracking-wider px-1">Category</label>
                                 <div className="relative">
                                     <select
                                         value={categoryId}
                                         onChange={(e) => setCategoryId(e.target.value)}
-                                        className="w-full appearance-none px-6 py-4 bg-slate-50 border border-slate-100 rounded-2xl text-slate-900 font-bold focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 transition-all cursor-pointer text-slate-900"
+                                        className="w-full appearance-none px-6 py-4 bg-slate-50 border border-slate-100 text-[13px] rounded-2xl text-slate-900 font-bold focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 transition-all cursor-pointer text-slate-900"
                                     >
                                         <option value="" disabled>Select Category</option>
                                         {categories.map((category) => (
@@ -148,13 +148,13 @@ const QuickAddModal: React.FC<QuickAddModalProps> = ({ isOpen, onClose }) => {
                     </div>
 
                     <div className="space-y-2">
-                        <label className="text-[13px] font-black text-slate-900 uppercase tracking-wider px-1">Date</label>
+                        <label className="text-[12px] font-bold text-slate-900 uppercase tracking-wider px-1">Date</label>
                         <div className="relative">
                             <input
                                 type="date"
                                 value={date}
                                 onChange={(e) => setDate(e.target.value)}
-                                className="w-full px-12 py-4 bg-slate-50 border border-slate-100 rounded-2xl text-slate-900 font-bold focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 transition-all text-slate-900"
+                                className="w-full px-12 py-4 bg-slate-50 border text-[15px] border-slate-100 rounded-2xl text-slate-900 font-bold focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 transition-all text-slate-900"
                             />
                             <Calendar size={18} className="absolute left-6 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none" />
                         </div>
@@ -162,7 +162,7 @@ const QuickAddModal: React.FC<QuickAddModalProps> = ({ isOpen, onClose }) => {
 
                     <button
                         onClick={handleAdd}
-                        className="w-full py-5 bg-gradient-to-r from-indigo-600 to-violet-600 text-white rounded-[1.5rem] font-black text-[15px] uppercase tracking-widest hover:opacity-90 active:scale-[0.98] transition-all shadow-xl shadow-indigo-100 mt-4"
+                        className="w-full py-4 bg-gradient-to-r from-indigo-600 to-violet-600 text-white rounded-[1rem] font-black text-[13px] uppercase tracking-widest hover:opacity-90 active:scale-[0.98] transition-all shadow-xl shadow-indigo-100 mt-3"
                     >
                         Add {activeTab === 'expense' ? 'Expense' : 'Income'}
                     </button>

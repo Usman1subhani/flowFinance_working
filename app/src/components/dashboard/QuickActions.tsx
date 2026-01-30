@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation';
 const actions = [
     { label: 'Add Expense', icon: <PlusCircle size={20} />, color: 'text-rose-500', path: '/transactions?add=expense' },
     { label: 'Add Income', icon: <ArrowUpCircle size={20} />, color: 'text-emerald-500', path: '/transactions?add=income' },
-    { label: 'Manage Accounts', icon: <Settings size={20} />, color: 'text-indigo-500', path: '/settings/accounts' },
+    { label: 'Manage Accounts', icon: <Settings size={20} />, color: 'text-indigo-500', path: '/accounts' },
 ];
 
 const QuickActions = () => {

@@ -2,11 +2,12 @@
 
 import React, { useState } from 'react';
 import { X, ChevronDown } from 'lucide-react';
-import { useAccounts } from '../../context/AccountContext';
+import { useAccounts, Account } from '../../context/AccountContext';
 
 interface NewAccountModalProps {
     isOpen: boolean;
     onClose: () => void;
+    editingAccount?: Account;
 }
 
 const colors = [
@@ -20,12 +21,26 @@ const colors = [
     '#3b82f6', // Blue
 ];
 
-const NewAccountModal: React.FC<NewAccountModalProps> = ({ isOpen, onClose }) => {
-    const { addAccount } = useAccounts();
+const NewAccountModal: React.FC<NewAccountModalProps> = ({ isOpen, onClose, editingAccount }) => {
+    const { addAccount, updateAccount } = useAccounts();
     const [selectedColor, setSelectedColor] = useState(colors[0]);
     const [name, setName] = useState('');
     const [currency, setCurrency] = useState('USD');
     const [startingBalance, setStartingBalance] = useState('0');
+
+    React.useEffect(() => {
+        if (editingAccount) {
+            setName(editingAccount.name);
+            setCurrency(editingAccount.currency);
+            setStartingBalance(editingAccount.startingBalance.replace(/[$,]/g, ''));
+            setSelectedColor(editingAccount.color);
+        } else {
+            setName('');
+            setCurrency('USD');
+            setStartingBalance('0');
+            setSelectedColor(colors[0]);
+        }
+    }, [editingAccount, isOpen]);
 
     if (!isOpen) return null;
 
@@ -33,16 +48,20 @@ const NewAccountModal: React.FC<NewAccountModalProps> = ({ isOpen, onClose }) =>
         e.preventDefault();
         if (!name.trim()) return;
 
-        addAccount({
+        const accountData = {
             name,
             currency,
-            startingBalance: `$${parseFloat(startingBalance).toLocaleString()}`,
+            startingBalance: `$${parseFloat(startingBalance).toLocaleString(undefined, { minimumFractionDigits: 2 })}`,
             color: selectedColor,
-        });
+        };
+
+        if (editingAccount) {
+            updateAccount(editingAccount.id, accountData);
+        } else {
+            addAccount(accountData);
+        }
 
         // Reset and Close
-        setName('');
-        setStartingBalance('0');
         onClose();
     };
 
@@ -54,7 +73,9 @@ const NewAccountModal: React.FC<NewAccountModalProps> = ({ isOpen, onClose }) =>
             >
                 {/* Header */}
                 <div className="p-6 md:p-8 pb-4 rounded-t-2xl flex items-center justify-between">
-                    <h3 className="heading-2 text-[20px] font-black text-slate-700">New Account</h3>
+                    <h3 className="heading-2 text-[20px] font-black text-slate-700">
+                        {editingAccount ? 'Edit Account' : 'New Account'}
+                    </h3>
                     <button
                         onClick={onClose}
                         className="p-1.5 hover:bg-slate-100 rounded-lg text-slate-400 hover:text-slate-600 transition-colors"
@@ -126,7 +147,7 @@ const NewAccountModal: React.FC<NewAccountModalProps> = ({ isOpen, onClose }) =>
                         type="submit"
                         className="btn-primary w-full py-4 rounded-xl text-sm font-semibold tracking-normal mt-2"
                     >
-                        Create Account
+                        {editingAccount ? 'Update Account' : 'Create Account'}
                     </button>
                 </form>
             </div>
