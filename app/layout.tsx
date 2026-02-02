@@ -8,6 +8,7 @@ import { TransactionProvider } from "./src/context/TransactionContext";
 import { BudgetProvider } from "./src/context/BudgetContext";
 import { HistoryProvider } from "./src/context/HistoryContext";
 import { InvestmentProvider } from "./src/context/InvestmentContext";
+import { UserProvider } from './src/context/UserContext';
 
 const outfit = Outfit({
   subsets: ["latin"],
@@ -29,21 +30,23 @@ export default function RootLayout({
       <body
         className={`${outfit.variable} antialiased font-sans`}
       >
-        <AccountProvider>
-          <CategoryProvider>
-            <TransactionProvider>
+        <UserProvider>
+          <HistoryProvider>
+            <InvestmentProvider>
               <BudgetProvider>
-                <HistoryProvider>
-                  <InvestmentProvider>
-                    <MainLayout>
-                      {children}
-                    </MainLayout>
-                  </InvestmentProvider>
-                </HistoryProvider>
+                <TransactionProvider>
+                  <CategoryProvider>
+                    <AccountProvider>
+                      <MainLayout>
+                        {children}
+                      </MainLayout>
+                    </AccountProvider>
+                  </CategoryProvider>
+                </TransactionProvider>
               </BudgetProvider>
-            </TransactionProvider>
-          </CategoryProvider>
-        </AccountProvider>
+            </InvestmentProvider>
+          </HistoryProvider>
+        </UserProvider>
       </body>
     </html>
   );

@@ -104,7 +104,7 @@ const AnalyticsScreen = () => {
             {/* Header */}
             <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
                 <div>
-                    <h1 className="text-3xl font-black text-slate-900 tracking-tight">Analytics</h1>
+                    <h1 className="text-2xl md:text-3xl font-black text-slate-900 tracking-tight">Analytics</h1>
                     <p className="text-slate-500 font-medium mt-1">Visualize your spending patterns and trends</p>
                 </div>
             </div>
@@ -124,17 +124,8 @@ const AnalyticsScreen = () => {
 
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
                 {/* 8-col section (adjusted for grid-cols-3 as 2/3) */}
-                <div className="lg:col-span-2 space-y-8s">
+                <div className="lg:col-span-2 space-y-8">
                     <ExpenseCategoryChart data={categoryData} />
-
-                    {/* Placeholder for Daily Trends - as seen in mockup */}
-                    {/* <div className="bg-white p-8 rounded-[2.5rem] border border-slate-100 shadow-sm min-h-[400px] flex flex-col items-center justify-center grayscale opacity-50">
-                        <div className="w-16 h-16 bg-slate-50 rounded-2xl flex items-center justify-center mb-4">
-                            <BarChart3 size={32} className="text-slate-200" />
-                        </div>
-                        <h4 className="text-lg font-black text-slate-900">Daily Trends</h4>
-                        <p className="text-sm text-slate-400 font-medium">Coming Soon</p>
-                    </div> */}
                 </div>
 
                 {/* 4-col section (adjusted for grid-cols-3 as 1/3) */}

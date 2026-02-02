@@ -21,17 +21,24 @@ const HistoryScreen = () => {
     }
 
     return (
-        <div className="animate-in fade-in duration-500 max-w-7xl mx-auto space-y-10">
+        <div className="max-w-5xl mx-auto space-y-6 md:space-y-10 animate-in fade-in slide-in-from-bottom-4 duration-700 pb-24 md:pb-10">
             {/* Header Section */}
-            <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
+            <div className="flex flex-col md:flex-row md:items-center justify-between gap-2 md:gap-4 px-1 md:px-0">
                 <div>
-                    <h1 className="text-3xl font-black text-slate-800 tracking-tight">Month History</h1>
-                    <p className="text-slate-500 font-medium mt-1">View your closed months and account summaries</p>
+                    <h1 className="text-2xl md:text-3xl font-black text-slate-900 tracking-tight">
+                        Month History
+                    </h1>
+                    <p className="text-slate-500 font-bold text-xs md:text-sm mt-1">View your closed months and account summaries</p>
                 </div>
+                {closedMonths.length > 0 && (
+                    <div className="bg-indigo-50 text-indigo-600 px-3 py-1.5 rounded-full text-[10px] font-black uppercase tracking-widest w-fit">
+                        {closedMonths.length} Closed Months
+                    </div>
+                )}
             </div>
 
             {/* List of Months */}
-            <div className="space-y-16 pb-20">
+            <div className="space-y-8 md:space-y-12">
                 {closedMonths.length > 0 ? (
                     closedMonths.map(month => (
                         <HistoryMonthCard
@@ -42,14 +49,14 @@ const HistoryScreen = () => {
                         />
                     ))
                 ) : (
-                    <div className="flex flex-col items-center justify-center py-32 bg-slate-50 border border-dashed border-slate-200 rounded-[3rem]">
-                        <div className="w-16 h-16 bg-white rounded-2xl flex items-center justify-center text-slate-300 shadow-sm mb-4">
+                    <div className="flex flex-col items-center justify-center py-20 md:py-32 bg-slate-50 border border-dashed border-slate-200 rounded-[2rem] md:rounded-[3rem] px-6 text-center">
+                        <div className="w-16 h-16 bg-white rounded-2xl flex items-center justify-center text-slate-300 shadow-sm mb-6">
                             <svg className="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                             </svg>
                         </div>
-                        <h3 className="text-xl font-black text-slate-400">No History Found</h3>
-                        <p className="text-slate-400 font-medium mt-1">Your closed months will appear here</p>
+                        <h3 className="text-xl font-black text-slate-900">No History Found</h3>
+                        <p className="text-slate-500 font-medium text-sm mt-2 max-w-xs mx-auto">Your completed months will appear here after you close them in the dashboard.</p>
                     </div>
                 )}
             </div>

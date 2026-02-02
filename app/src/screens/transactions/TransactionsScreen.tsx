@@ -55,23 +55,25 @@ const TransactionsScreen = () => {
     return (
         <div className="space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-500">
             {/* Header section */}
+            {/* Header section */}
+            {/* Header section */}
             <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
                 <div>
-                    <h1 className="heading-2 text-[24px] font-black text-slate-900">Transactions</h1>
-                    <p className="text-slate-500 font-medium mt-1">Track all your income and expenses</p>
+                    <h1 className="text-xl md:text-[24px] font-black text-slate-900 tracking-tight">Transactions</h1>
+                    <p className="text-slate-500 text-xs md:text-sm font-bold mt-1">Track all your income and expenses</p>
                 </div>
 
-                <div className="flex items-center gap-2">
+                <div className="flex items-center gap-3 w-full md:w-auto">
                     <button
                         onClick={() => handleOpenModal('income')}
-                        className="flex items-center gap-2 px-4 py-2 bg-emerald-500 hover:bg-emerald-600 text-white rounded-lg font-bold text-sm transition-all shadow-md shadow-emerald-100 active:scale-95"
+                        className="flex-1 md:flex-none justify-center flex items-center gap-2 px-4 py-2.5 md:px-6 md:py-3 bg-emerald-500 hover:bg-emerald-600 text-white rounded-[0.5rem] font-bold text-xs md:text-sm transition-all shadow-md shadow-emerald-100 active:scale-95"
                     >
                         <Plus size={16} />
                         Income
                     </button>
                     <button
                         onClick={() => handleOpenModal('expense')}
-                        className="flex items-center gap-2 px-4 py-2 bg-rose-500 hover:bg-rose-600 text-white rounded-lg font-bold text-sm transition-all shadow-md shadow-rose-100 active:scale-95"
+                        className="flex-1 md:flex-none justify-center flex items-center gap-2 px-4 py-2.5 md:px-6 md:py-3 bg-rose-500 hover:bg-rose-600 text-white rounded-[0.5rem] font-bold text-xs md:text-sm transition-all shadow-md shadow-rose-100 active:scale-95"
                     >
                         <Plus size={16} />
                         Expense
@@ -91,18 +93,19 @@ const TransactionsScreen = () => {
             />
 
             {/* Transactions List Container */}
-            <div className="bg-white p-6 md:p-8 rounded-2xl border border-slate-100 shadow-sm">
-                <div className="flex items-center justify-between mb-8 px-2">
-                    <h2 className="text-sm font-black text-slate-600 uppercase tracking-widest flex items-center gap-2">
+            <div className="bg-white p-4 md:p-6 lg:p-8 rounded-2xl border border-slate-100 shadow-sm">
+                <div className="flex items-center justify-between mb-6 md:mb-8 px-1 md:px-2">
+                    <h2 className="text-[10px] md:text-xs font-black text-slate-400 uppercase tracking-widest flex items-center gap-2">
                         {filteredTransactions.length} Transactions Found
                     </h2>
-                    <button className="text-xs font-bold text-indigo-600 hover:text-indigo-700 flex items-center gap-1.5 px-3 py-1.5 bg-indigo-50 rounded-lg transition-colors">
+                    <button className="text-[10px] md:text-xs font-bold text-indigo-600 hover:text-indigo-700 flex items-center gap-1.5 px-2.5 py-1.5 md:px-3 md:py-2 bg-indigo-50 rounded-lg transition-colors capitalize md:uppercase">
                         <Download size={14} />
-                        Export
+                        <span className="hidden sm:inline">Export CSV</span>
+                        <span className="inline sm:hidden">Export</span>
                     </button>
                 </div>
 
-                <div className="space-y-4">
+                <div className="space-y-0">
                     {filteredTransactions.length > 0 ? (
                         filteredTransactions.map((tx) => (
                             <TransactionItem

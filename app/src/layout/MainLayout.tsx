@@ -2,20 +2,21 @@
 
 import React from 'react';
 import Sidebar from '../components/Sidebar';
+import MobileBottomNav from '../components/MobileBottomNav';
+import FutureTransactionDrawer from '../components/future/FutureTransactionDrawer';
 
 interface MainLayoutProps {
     children: React.ReactNode;
 }
 
-import FutureTransactionDrawer from '../components/future/FutureTransactionDrawer';
-
 const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
     return (
-        <div className="min-h-screen bg-slate-50 flex">
+        <div className="min-h-screen bg-slate-50 flex flex-col md:flex-row pb-24 md:pb-0">
             <Sidebar />
+            <MobileBottomNav />
             <FutureTransactionDrawer />
-            <main className="flex-1 ml-64 min-h-screen">
-                <div className="p-8 lg:p-12 max-w-[1440px] mx-auto">
+            <main className="flex-1 md:ml-64 min-h-screen w-full">
+                <div className="p-4 md:p-8 lg:p-12 max-w-[1440px] mx-auto">
                     {children}
                 </div>
             </main>

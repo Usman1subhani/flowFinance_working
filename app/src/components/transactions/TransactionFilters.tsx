@@ -28,7 +28,7 @@ const TransactionFilters: React.FC<TransactionFiltersProps> = ({
     const { categories } = useCategories();
 
     return (
-        <div className="bg-white p-6 md:p-8 rounded-2xl border border-slate-100 shadow-sm mb-8">
+        <div className="bg-white p-4 md:p-8 rounded-2xl border border-slate-100 shadow-sm mb-6 md:mb-8">
             <div className="flex items-center justify-between mb-8">
                 <div className="flex items-center gap-3">
                     <Filter size={18} className="text-slate-400" />
@@ -54,7 +54,7 @@ const TransactionFilters: React.FC<TransactionFiltersProps> = ({
                 </button>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
                 {/* Search */}
                 <div className="space-y-2">
                     <label className="text-[11px] font-black text-slate-700 uppercase tracking-widest px-1">Search</label>

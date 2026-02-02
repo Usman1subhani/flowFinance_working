@@ -13,22 +13,23 @@ interface SummaryCardProps {
 
 const SummaryCard: React.FC<SummaryCardProps> = ({ label, amount, icon, bgColor, iconBgColor }) => {
     const isNegative = amount < 0;
+    // Format: $11,500.00
     const formattedAmount = `${isNegative ? '-' : ''}$${Math.abs(amount).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
 
     return (
-        <div className={`${bgColor} p-8 rounded-[0.8rem] flex flex-col justify-between relative overflow-hidden group hover:shadow-lg transition-all duration-500 border border-black/5 shadow-sm`}>
-            <div className="flex justify-between items-start z-10">
-                <span className="text-slate-500 font-bold text-[13px] tracking-tight uppercase opacity-70">{label}</span>
-                <div className={`${iconBgColor} w-11 h-11 rounded-2xl flex items-center justify-center text-white shadow-lg`}>
-                    {React.cloneElement(icon as React.ReactElement<{ size?: number }>, { size: 20 })}
+        <div className={`${bgColor} p-4 md:p-5 lg:p-6 rounded-[0.7rem] md:rounded-[1rem] lg:rounded-[1.2rem] flex flex-col justify-between relative overflow-hidden group hover:shadow-lg transition-all duration-300 border border-transparent`}>
+            {/* Top Row: Label and Icon */}
+            <div className="flex justify-between items-center mb-3 md:mb-4 lg:mb-6">
+                <span className="text-slate-500 font-black text-[10px] md:text-[11px] lg:text-[12px] tracking-widest uppercase opacity-80 max-w-[60%] leading-tight">{label}</span>
+                <div className={`${iconBgColor} w-8 h-8 md:w-10 md:h-10 lg:w-12 lg:h-12 rounded-[0.7rem] md:rounded-[1rem] flex items-center justify-center text-white shadow-md shadow-black/5`}>
+                    {React.cloneElement(icon as React.ReactElement<{ className?: string; strokeWidth?: number }>, { className: "w-4 h-4 md:w-5 md:h-5 lg:w-6 lg:h-6", strokeWidth: 2.5 })}
                 </div>
             </div>
-            <div className="mt-5 z-10">
-                <h3 className="text-[22px] font-black text-slate-700  leading-none">{formattedAmount}</h3>
-            </div>
 
-            {/* Background decorative element */}
-            <div className={`absolute -right-4 -bottom-4 w-24 h-24 ${iconBgColor.replace('bg-', 'bg-')}/10 rounded-full blur-3xl group-hover:scale-110 transition-transform duration-700`}></div>
+            {/* Bottom Row: Amount */}
+            <div className="z-10">
+                <h3 className="text-[18px] md:text-[20px] lg:text-[24px] font-black text-slate-800 tracking-tight leading-none">{formattedAmount}</h3>
+            </div>
         </div>
     );
 };
@@ -101,7 +102,7 @@ const SummaryCards: React.FC<SummaryCardsProps> = ({ selectedAccountId = 'all' }
     ];
 
     return (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-10">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 mb-10">
             {cards.map((card, index) => (
                 <SummaryCard key={index} {...card} />
             ))}

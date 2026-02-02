@@ -43,7 +43,7 @@ const AccountCard: React.FC<AccountCardProps> = ({
     return (
         <div
             onClick={onClick}
-            className={`min-w-[270px] p-6 rounded-[0.8rem] border transition-all duration-300 bg-white cursor-pointer ${isActive
+            className={`min-w-[240px] md:min-w-[260px] lg:min-w-[270px] p-4 md:p-5 lg:p-6 rounded-[0.8rem] border transition-all duration-300 bg-white cursor-pointer ${isActive
                 ? 'border-transparent shadow-xl shadow-indigo-100/30'
                 : 'border-slate-100 hover:border-slate-200 shadow-sm'
                 }`}
@@ -55,12 +55,12 @@ const AccountCard: React.FC<AccountCardProps> = ({
                 borderRadius: 'inherit' // Border image doesn't play well with radius, so we might need a wrapper if radius is strictly needed with gradient border
             } : {}}
         >
-            <div className="flex items-start justify-between mb-8">
+            <div className="flex items-start justify-between mb-6 md:mb-8">
                 <div
-                    className="w-11 h-11 rounded-xl flex items-center justify-center text-white shadow-sm"
+                    className="w-9 h-9 md:w-10 md:h-10 lg:w-11 lg:h-11 rounded-[0.7rem] md:rounded-xl flex items-center justify-center text-white shadow-sm"
                     style={{ backgroundColor: iconBg }}
                 >
-                    {React.isValidElement(icon) ? React.cloneElement(icon as React.ReactElement<{ size?: number }>, { size: 20 }) : icon}
+                    {React.isValidElement(icon) ? React.cloneElement(icon as React.ReactElement<{ className?: string }>, { className: "w-4 h-4 md:w-5 md:h-5" }) : icon}
                 </div>
                 <div className="flex items-center gap-1.5">
                     <button
@@ -76,12 +76,12 @@ const AccountCard: React.FC<AccountCardProps> = ({
             </div>
 
             <div>
-                <h4 className="text-slate-500 text-[13px] font-medium mb-1.5  ">{name}</h4>
+                <h4 className="text-slate-500 text-xs md:text-[13px] font-medium mb-1.5  ">{name}</h4>
                 <div className="flex items-baseline gap-2">
-                    <span className="text-xl font-bold text-slate-900">
+                    <span className="text-lg md:text-xl lg:text-2xl font-bold text-slate-900">
                         {isHidden ? '••••••' : `${currencySymbol}${displayBalance}`}
                     </span>
-                    {!isHidden && <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">{currency}</span>}
+                    {!isHidden && <span className="text-[9px] md:text-[10px] font-bold text-slate-400 uppercase tracking-wider">{currency}</span>}
                 </div>
             </div>
         </div>

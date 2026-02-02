@@ -148,8 +148,8 @@ const DashboardScreen = () => {
             {/* Summary Stats */}
             <SummaryCards selectedAccountId={selectedAccountId} />
 
-            {/* Bottom Grid */}
-            <div className="flex flex-col md:flex-row gap-8">
+            {/* Bottom Grid - Stacks on mobile, side-by-side on desktop */}
+            <div className="flex flex-col xl:flex-row gap-6 md:gap-8 pb-20 md:pb-0">
                 <RecentTransactions selectedAccountId={selectedAccountId} />
                 <QuickActions />
             </div>

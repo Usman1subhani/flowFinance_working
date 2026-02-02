@@ -20,18 +20,18 @@ const CategoryCard: React.FC<CategoryCardProps> = ({
     onDelete
 }) => {
     return (
-        <div className="bg-white p-5 rounded-xl border border-slate-100 shadow-sm hover:shadow-md transition-all duration-300 group flex flex-col items-center justify-center relative min-h-[160px]">
+        <div className="bg-white p-5 md:p-6 rounded-[1.2rem] md:rounded-2xl border border-slate-50 shadow-[0_4px_20px_-4px_rgba(0,0,0,0.05)] hover:shadow-[0_8px_30px_rgba(0,0,0,0.08)] transition-all duration-300 group flex flex-col items-center justify-center relative min-h-[140px] md:min-h-[160px] cursor-pointer">
             {/* Action Buttons - Visible on Hover */}
             <div className="absolute top-3 right-3 flex gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
                 <button
                     onClick={(e) => { e.stopPropagation(); onEdit?.(); }}
-                    className="p-1.5 bg-slate-50 text-slate-400 hover:text-indigo-600 rounded-lg transition-colors border border-slate-100"
+                    className="p-1.5 bg-white text-slate-400 hover:text-indigo-600 rounded-lg transition-colors border border-slate-100 shadow-sm"
                 >
                     <Edit2 size={13} />
                 </button>
                 <button
                     onClick={(e) => { e.stopPropagation(); onDelete?.(); }}
-                    className="p-1.5 bg-slate-50 text-slate-400 hover:text-rose-600 rounded-lg transition-colors border border-slate-100"
+                    className="p-1.5 bg-white text-slate-400 hover:text-rose-600 rounded-lg transition-colors border border-slate-100 shadow-sm"
                 >
                     <Trash2 size={13} />
                 </button>
@@ -39,17 +39,20 @@ const CategoryCard: React.FC<CategoryCardProps> = ({
 
             {/* Icon Square */}
             <div
-                className="w-12 h-12 rounded-xl flex items-center justify-center text-white shadow-sm mb-4 transition-transform group-hover:scale-105"
-                style={{ backgroundColor: color }}
+                className="w-12 h-12 md:w-14 md:h-14 rounded-xl md:rounded-2xl flex items-center justify-center text-white shadow-lg transition-transform group-hover:scale-110 duration-300"
+                style={{
+                    backgroundColor: color,
+                    boxShadow: `0 8px 16px -4px ${color}40`
+                }}
             >
-                <Tag size={20} />
+                <Tag className="w-5 h-5 md:w-6 md:h-6" strokeWidth={2.5} />
             </div>
 
             {/* Text Info */}
-            <div className="text-center">
-                <h4 className="text-[14px] font-semibold text-slate-900 tracking-tight leading-none mb-1.5">{name}</h4>
+            <div className="text-center mt-2">
+                <h4 className="text-[14px] md:text-[15px] font-bold text-slate-900 tracking-tight leading-none mb-1.5">{name}</h4>
                 {isSystem && (
-                    <p className="text-[9px] font-bold text-slate-300 uppercase tracking-[0.1em] leading-none">System</p>
+                    <p className="text-[9px] font-bold text-slate-400 uppercase tracking-widest leading-none">System</p>
                 )}
             </div>
         </div>

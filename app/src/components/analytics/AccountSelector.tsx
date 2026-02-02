@@ -30,7 +30,7 @@ const AccountSelector: React.FC<AccountSelectorProps> = ({ selectedAccountId, on
             {/* All Accounts Option */}
             <div
                 onClick={() => onSelect('all')}
-                className={`min-w-[240px] p-5 rounded-[1rem] border transition-all duration-300 cursor-pointer ${selectedAccountId === 'all'
+                className={`min-w-[200px] md:min-w-[240px] p-5 rounded-[1rem] border transition-all duration-300 cursor-pointer ${selectedAccountId === 'all'
                     ? 'bg-white border-indigo-500 shadow-xl shadow-indigo-100/30'
                     : 'bg-white border-slate-100 hover:border-slate-200 shadow-sm opacity-60 grayscale-[0.5]'
                     }`}
@@ -64,7 +64,7 @@ const AccountSelector: React.FC<AccountSelectorProps> = ({ selectedAccountId, on
                 <div
                     key={acc.id}
                     onClick={() => onSelect(acc.id)}
-                    className={`min-w-[240px] p-5 rounded-[1rem] border transition-all duration-300 cursor-pointer ${selectedAccountId === acc.id
+                    className={`min-w-[200px] md:min-w-[240px] p-5 rounded-[1rem] border transition-all duration-300 cursor-pointer ${selectedAccountId === acc.id
                         ? 'bg-white border-indigo-500 shadow-xl shadow-indigo-100/30'
                         : 'bg-white border-slate-100 hover:border-slate-200 shadow-sm opacity-60 grayscale-[0.5]'
                         }`}

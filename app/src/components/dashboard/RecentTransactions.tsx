@@ -21,10 +21,10 @@ const RecentTransactions: React.FC<RecentTransactionsProps> = ({ selectedAccount
         .slice(0, 5);
 
     return (
-        <div className="bg-white p-6 md:p-8 rounded-[1rem] border border-black/10 shadow-sm grow flex flex-col">
-            <h3 className="text-[18px] font-bold text-black mb-5">Recent Transactions</h3>
+        <div className="bg-white p-4 md:p-6 lg:p-8 rounded-[0.7rem] md:rounded-[1rem] border border-black/10 shadow-sm grow flex flex-col">
+            <h3 className="text-base md:text-lg lg:text-[18px] font-bold text-black mb-3 md:mb-5">Recent Transactions</h3>
 
-            <div className="space-y-1 flex-1 overflow-auto pr-5 ">
+            <div className="space-y-1 flex-1 overflow-auto pr-2 md:pr-5">
                 {displayTransactions.map((t) => {
                     const category = categories.find(c => c.id === t.categoryId);
                     const budget = budgets.find(b => b.categoryId === t.categoryId);
@@ -45,22 +45,25 @@ const RecentTransactions: React.FC<RecentTransactionsProps> = ({ selectedAccount
                     };
 
                     return (
-                        <div key={t.id} className="flex flex-col gap-2 group cursor-pointer hover:bg-slate-50 p-3 rounded-2xl transition-all -mx-3">
+                        <div key={t.id} className="flex flex-col gap-2 group cursor-pointer hover:bg-slate-50 p-2 md:p-3 rounded-xl md:rounded-2xl transition-all -mx-2 md:-mx-3">
                             <div className="flex items-center justify-between">
-                                <div className="flex items-center gap-4">
-                                    <div className={`w-11 h-11 rounded-2xl flex items-center justify-center text-white shadow-md ${t.type === 'income' ? 'bg-emerald-500 shadow-emerald-100' : 'bg-rose-500 shadow-rose-100'
+                                <div className="flex items-center gap-3 md:gap-4">
+                                    <div className={`w-9 h-9 md:w-11 md:h-11 rounded-xl md:rounded-2xl flex items-center justify-center text-white shadow-md ${t.type === 'income' ? 'bg-emerald-500 shadow-emerald-100' : 'bg-rose-500 shadow-rose-100'
                                         }`}>
-                                        {t.type === 'income' ? <TrendingUp size={20} /> : <TrendingDown size={20} />}
+                                        {t.type === 'income' ?
+                                            <TrendingUp className="w-4 h-4 md:w-5 md:h-5" strokeWidth={2.5} /> :
+                                            <TrendingDown className="w-4 h-4 md:w-5 md:h-5" strokeWidth={2.5} />
+                                        }
                                     </div>
                                     <div>
-                                        <h4 className="font-bold text-slate-900 text-[15px] tracking-tight">{t.title}</h4>
+                                        <h4 className="font-bold text-slate-900 text-sm md:text-[15px] tracking-tight">{t.title}</h4>
                                         <div className="flex items-center gap-2 mt-0.5">
-                                            <span className="text-[12px] font-bold text-slate-400">
+                                            <span className="text-[10px] md:text-[12px] font-bold text-slate-400">
                                                 {new Date(t.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}
                                             </span>
                                             {category && (
                                                 <span
-                                                    className="px-2 py-0.5 rounded-lg text-[10px] font-black uppercase tracking-wider bg-slate-100 text-slate-500"
+                                                    className="px-2 py-0.5 rounded-lg text-[9px] md:text-[10px] font-black uppercase tracking-wider bg-slate-100 text-slate-500"
                                                 >
                                                     {category.name}
                                                 </span>
@@ -68,7 +71,7 @@ const RecentTransactions: React.FC<RecentTransactionsProps> = ({ selectedAccount
                                         </div>
                                     </div>
                                 </div>
-                                <div className={`font-black text-[16px] tracking-tight ${t.type === 'income' ? 'text-emerald-500' : 'text-slate-900'
+                                <div className={`font-black text-sm md:text-[16px] tracking-tight ${t.type === 'income' ? 'text-emerald-500' : 'text-rose-500'
                                     }`}>
                                     {t.type === 'income' ? '+' : '-'}${t.amount.toLocaleString(undefined, { minimumFractionDigits: 2 })}
                                 </div>
@@ -76,12 +79,12 @@ const RecentTransactions: React.FC<RecentTransactionsProps> = ({ selectedAccount
 
                             {/* Budget Progress Bar */}
                             {t.type === 'expense' && budget && (
-                                <div className="ml-[3.75rem] mt-1 pr-2">
+                                <div className="ml-[3rem] md:ml-[3.75rem] mt-1 pr-2">
                                     <div className="flex justify-between items-center mb-1">
-                                        <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Growth Budget</span>
-                                        <span className="text-[10px] font-bold text-slate-500">{Math.round(progress)}%</span>
+                                        <span className="text-[9px] md:text-[10px] font-bold text-slate-400 uppercase tracking-widest">Growth Budget</span>
+                                        <span className="text-[9px] md:text-[10px] font-bold text-slate-500">{Math.round(progress)}%</span>
                                     </div>
-                                    <div className="h-1.5 w-full bg-slate-100 rounded-full overflow-hidden">
+                                    <div className="h-1 md:h-1.5 w-full bg-slate-100 rounded-full overflow-hidden">
                                         <div
                                             className={`h-full transition-all duration-1000 ${getProgressColor(progress)}`}
                                             style={{ width: `${Math.min(progress, 100)}%` }}

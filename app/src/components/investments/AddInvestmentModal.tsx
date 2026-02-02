@@ -1,24 +1,21 @@
-'use client';
-
 import React, { useState } from 'react';
 import { X, Calendar, DollarSign, TrendingUp, Briefcase } from 'lucide-react';
+import { Investment } from '../../context/InvestmentContext';
 
 interface AddInvestmentModalProps {
     isOpen: boolean;
     onClose: () => void;
-    onAdd: (investment: {
-        type: 'stock' | 'mutual_fund';
-        name: string;
-        amount: number;
-        date: string;
-        note?: string;
-    }) => void;
+    onAdd: (investment: Omit<Investment, 'id'>) => void;
+    onUpdate?: (id: string, updates: Partial<Investment>) => void;
+    editInvestment?: Investment | null;
 }
 
 const AddInvestmentModal: React.FC<AddInvestmentModalProps> = ({
     isOpen,
     onClose,
     onAdd,
+    onUpdate,
+    editInvestment
 }) => {
     const [type, setType] = useState<'stock' | 'mutual_fund'>('stock');
     const [name, setName] = useState('');
@@ -26,23 +23,45 @@ const AddInvestmentModal: React.FC<AddInvestmentModalProps> = ({
     const [date, setDate] = useState(new Date().toISOString().split('T')[0]);
     const [note, setNote] = useState('');
 
+    React.useEffect(() => {
+        if (editInvestment) {
+            setType(editInvestment.type);
+            setName(editInvestment.name);
+            setAmount(editInvestment.amount.toString());
+            setDate(editInvestment.date);
+            setNote(editInvestment.note || '');
+        } else if (!isOpen) {
+            // Only reset when closing or specifically adding
+        } else {
+            setType('stock');
+            setName('');
+            setAmount('');
+            setDate(new Date().toISOString().split('T')[0]);
+            setNote('');
+        }
+    }, [editInvestment, isOpen]);
+
     if (!isOpen) return null;
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
-        onAdd({
-            type,
-            name,
-            amount: parseFloat(amount),
-            date,
-            note,
-        });
-        // Reset form
-        setType('stock');
-        setName('');
-        setAmount('');
-        setDate(new Date().toISOString().split('T')[0]);
-        setNote('');
+        if (editInvestment && onUpdate) {
+            onUpdate(editInvestment.id, {
+                type,
+                name,
+                amount: parseFloat(amount),
+                date,
+                note,
+            });
+        } else {
+            onAdd({
+                type,
+                name,
+                amount: parseFloat(amount),
+                date,
+                note,
+            });
+        }
         onClose();
     };
 
@@ -50,7 +69,9 @@ const AddInvestmentModal: React.FC<AddInvestmentModalProps> = ({
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/50 backdrop-blur-sm">
             <div className="w-full max-w-md bg-white shadow-2xl rounded-2xl ring-1 ring-slate-100">
                 <div className="flex items-center justify-between p-6 border-b border-slate-100">
-                    <h2 className="text-xl font-bold text-slate-900">Add Investment</h2>
+                    <h2 className="text-xl font-bold text-slate-900">
+                        {editInvestment ? 'Edit Investment' : 'Add Investment'}
+                    </h2>
                     <button
                         onClick={onClose}
                         className="p-2 transition-colors rounded-full hover:bg-slate-50 text-slate-400 hover:text-slate-600"
@@ -155,7 +176,7 @@ const AddInvestmentModal: React.FC<AddInvestmentModalProps> = ({
                             type="submit"
                             className="flex-1 px-4 py-3 text-sm font-bold text-white transition-all shadow-lg rounded-xl bg-gradient-to-r from-indigo-600 to-violet-600 hover:shadow-indigo-500/25 hover:from-indigo-700 hover:to-violet-700 active:scale-[0.98]"
                         >
-                            Add Investment
+                            {editInvestment ? 'Update Investment' : 'Add Investment'}
                         </button>
                     </div>
                 </form>

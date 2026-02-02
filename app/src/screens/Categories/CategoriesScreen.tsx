@@ -29,7 +29,7 @@ const CategoriesScreen = () => {
     return (
         <div className="animate-in fade-in duration-500">
             {/* Header Section */}
-            <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-10">
+            <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6 md:mb-10">
                 <div>
                     <h1 className="heading-1">Categories</h1>
                     <p className="text-sub mt-1">Organize your expenses with custom categories</p>
@@ -45,7 +45,7 @@ const CategoriesScreen = () => {
             </div>
 
             {/* Grid Layout for Categories */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-6">
+            <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4 md:gap-6">
                 {categories.map((category) => (
                     <CategoryCard
                         key={category.id}

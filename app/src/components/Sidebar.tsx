@@ -27,11 +27,14 @@ const navItems = [
     { icon: UserCircle, label: 'Profile', id: 'profile', href: '/profile' },
 ];
 
+import { useUser } from '../context/UserContext';
+
 const Sidebar = () => {
     const pathname = usePathname();
+    const { user } = useUser();
 
     return (
-        <aside className="fixed left-0 top-0 h-screen w-64 bg-white border-r border-gray-100 flex flex-col z-50">
+        <aside className="hidden md:flex fixed left-0 top-0 h-screen w-64 bg-white border-r border-gray-100 flex-col z-50">
             {/* Logo */}
             <div className="p-6 mb-2">
                 <div className="flex items-center gap-3">
@@ -70,12 +73,12 @@ const Sidebar = () => {
             {/* User Support / Profile */}
             <div className="p-4 mt-auto border-t border-slate-100">
                 <div className="flex items-center gap-3 bg-slate-50/50 p-3 rounded-2xl hover:bg-slate-50 transition-colors cursor-pointer group">
-                    <div className="w-10 h-10 rounded-full bg-emerald-400 flex items-center justify-center text-white font-bold text-sm ring-4 ring-white shadow-sm shrink-0">
-                        U
+                    <div className={`w-10 h-10 rounded-full ${user.avatarColor} flex items-center justify-center text-white font-bold text-sm ring-4 ring-white shadow-sm shrink-0`}>
+                        {user.name.charAt(0)}
                     </div>
                     <div className="flex-1 min-w-0">
-                        <p className="text-sm font-bold text-slate-900 truncate">Usman Subhani</p>
-                        <p className="text-xs text-slate-500 truncate">subhaniusman420@gm...</p>
+                        <p className="text-sm font-bold text-slate-900 truncate">{user.name}</p>
+                        <p className="text-xs text-slate-500 truncate">{user.email}</p>
                     </div>
                     <button className="text-slate-400 group-hover:text-rose-500 transition-colors shrink-0">
                         <LogOut size={18} />

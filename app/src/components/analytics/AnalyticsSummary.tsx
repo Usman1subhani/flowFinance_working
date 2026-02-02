@@ -66,7 +66,7 @@ interface AnalyticsSummaryProps {
 
 const AnalyticsSummary: React.FC<AnalyticsSummaryProps> = ({ income, expense, balance }) => {
     return (
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
             <SummaryCard title="Total Income" amount={income} type="income" />
             <SummaryCard title="Total Expenses" amount={expense} type="expense" />
             <SummaryCard title="Net Balance" amount={balance} type="balance" />
