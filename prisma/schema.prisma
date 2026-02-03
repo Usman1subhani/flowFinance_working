@@ -1,0 +1,140 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "../app/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model User {
+  id                 String              @id @default(uuid())
+  email              String              @unique
+  name               String
+  avatar             String?
+  role               String              @default("user")
+  createdAt          DateTime            @default(now())
+  updatedAt          DateTime            @updatedAt
+  categories         Category[]
+  accounts           Account[]
+  transactions       Transaction[]
+  futureTransactions FutureTransaction[]
+  investments        Investment[]
+  budgets            Budget[]
+  closedMonths       ClosedMonth[]
+}
+
+model Category {
+  id                 String              @id @default(uuid())
+  name               String
+  color              String
+  userId             String
+  user               User                @relation(fields: [userId], references: [id])
+  createdAt          DateTime            @default(now())
+  updatedAt          DateTime            @updatedAt
+  transactions       Transaction[]
+  futureTransactions FutureTransaction[]
+  budgets            Budget[]
+}
+
+model Account {
+  id                 String              @id @default(uuid())
+  name               String
+  balance            Float               @default(0)
+  startingBalance    Float               @default(0)
+  currency           String
+  color              String
+  icon               String?
+  userId             String
+  user               User                @relation(fields: [userId], references: [id])
+  createdAt          DateTime            @default(now())
+  updatedAt          DateTime            @updatedAt
+  transactions       Transaction[]
+  futureTransactions FutureTransaction[]
+}
+
+model Transaction {
+  id         String    @id @default(uuid())
+  title      String
+  amount     Float
+  type       String
+  date       DateTime  @default(now())
+  note       String?
+  attachment String?
+  recurrence String?
+  userId     String
+  user       User      @relation(fields: [userId], references: [id])
+  accountId  String
+  account    Account   @relation(fields: [accountId], references: [id])
+  categoryId String?
+  category   Category? @relation(fields: [categoryId], references: [id])
+  createdAt  DateTime  @default(now())
+  updatedAt  DateTime  @updatedAt
+}
+
+model FutureTransaction {
+  id         String    @id @default(uuid())
+  title      String
+  amount     Float
+  type       String
+  userId     String
+  user       User      @relation(fields: [userId], references: [id])
+  accountId  String
+  account    Account   @relation(fields: [accountId], references: [id])
+  categoryId String?
+  category   Category? @relation(fields: [categoryId], references: [id])
+  createdAt  DateTime  @default(now())
+  updatedAt  DateTime  @updatedAt
+}
+
+model Investment {
+  id           String   @id @default(uuid())
+  type         String   // "stock" or "mutual_fund"
+  name         String
+  amount       Float
+  currentValue Float?
+  date         DateTime
+  note         String?
+  userId       String
+  user         User     @relation(fields: [userId], references: [id])
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}
+
+model Budget {
+  id         String   @id @default(uuid())
+  amount     Float
+  spent      Float    @default(0)
+  userId     String
+  user       User     @relation(fields: [userId], references: [id])
+  categoryId String
+  category   Category @relation(fields: [categoryId], references: [id])
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+}
+
+model ClosedMonth {
+  id          String           @id @default(uuid())
+  monthName   String
+  periodStart DateTime
+  periodEnd   DateTime
+  income      Float
+  expenses    Float
+  net         Float
+  userId      String
+  user        User             @relation(fields: [userId], references: [id])
+  accounts    HistoryAccount[]
+  createdAt   DateTime         @default(now())
+}
+
+model HistoryAccount {
+  id              String      @id @default(uuid())
+  name            String
+  startingBalance Float
+  endingBalance   Float
+  currency        String
+  color           String
+  carriedForward  Boolean     @default(false)
+  closedMonthId   String
+  closedMonth     ClosedMonth @relation(fields: [closedMonthId], references: [id])
+}
