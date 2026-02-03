@@ -1,4 +1,4 @@
-import AnalyticsScreen from "../src/screens/AnalyticsScreen";
+import AnalyticsScreen from "../src/lib/AnalyticsScreen";
 
 export default function AnalyticsPage() {
     return <AnalyticsScreen />;

@@ -1,4 +1,4 @@
-import AccountsScreen from "../src/screens/accounts/AccountsScreen";
+import AccountsScreen from "../src/lib/AccountsScreen";
 
 export default function AccountsPage() {
     return <AccountsScreen />;

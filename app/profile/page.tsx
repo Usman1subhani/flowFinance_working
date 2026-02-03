@@ -1,5 +1,4 @@
-import React from 'react';
-import ProfileScreen from '../src/screens/profile/ProfileScreen';
+import ProfileScreen from "../src/lib/ProfileScreen";
 
 export default function ProfilePage() {
     return <ProfileScreen />;

@@ -2,10 +2,10 @@
 
 import React, { useState, useMemo } from 'react';
 import { Plus, Download, Filter as FilterIcon } from 'lucide-react';
-import TransactionFilters from '../../components/transactions/TransactionFilters';
-import TransactionItem from '../../components/transactions/TransactionItem';
-import TransactionModal from '../../components/transactions/TransactionModal';
-import { useTransactions, Transaction } from '../../context/TransactionContext';
+import TransactionFilters from '../components/transactions/TransactionFilters';
+import TransactionItem from '../components/transactions/TransactionItem';
+import TransactionModal from '../components/transactions/TransactionModal';
+import { useTransactions, Transaction } from '../context/TransactionContext';
 
 const TransactionsScreen = () => {
     const { transactions, addTransaction, updateTransaction, deleteTransaction } = useTransactions();
@@ -54,8 +54,6 @@ const TransactionsScreen = () => {
 
     return (
         <div className="space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-500">
-            {/* Header section */}
-            {/* Header section */}
             {/* Header section */}
             <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
                 <div>

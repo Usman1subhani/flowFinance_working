@@ -1,4 +1,4 @@
-import InvestmentsScreen from '../src/screens/investments/InvestmentsScreen';
+import InvestmentsScreen from "../src/lib/InvestmentsScreen";
 
 export default function InvestmentsPage() {
     return <InvestmentsScreen />;

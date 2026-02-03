@@ -2,9 +2,9 @@
 
 import React, { useState } from 'react';
 import { Plus } from 'lucide-react';
-import { useCategories, Category } from '../../context/CategoryContext';
-import CategoryCard from '../../components/category/CategoryCard';
-import NewCategoryModal from '../../components/category/NewCategoryModal';
+import { useCategories, Category } from '../context/CategoryContext';
+import CategoryCard from '../components/category/CategoryCard';
+import NewCategoryModal from '../components/category/NewCategoryModal';
 
 const CategoriesScreen = () => {
     const { categories, deleteCategory } = useCategories();

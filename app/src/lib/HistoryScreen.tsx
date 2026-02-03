@@ -1,9 +1,9 @@
 'use client';
 
 import React, { useState } from 'react';
-import { useHistory, ClosedMonth } from '../../context/HistoryContext';
-import HistoryMonthCard from '../../components/history/HistoryMonthCard';
-import HistoryDetailView from '../../components/history/HistoryDetailView';
+import { useHistory, ClosedMonth } from '../context/HistoryContext';
+import HistoryMonthCard from '../components/history/HistoryMonthCard';
+import HistoryDetailView from '../components/history/HistoryDetailView';
 
 const HistoryScreen = () => {
     const { closedMonths, deleteHistory } = useHistory();

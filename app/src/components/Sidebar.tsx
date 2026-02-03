@@ -28,10 +28,12 @@ const navItems = [
 ];
 
 import { useUser } from '../context/UserContext';
+import { useRouter } from 'next/navigation';
 
 const Sidebar = () => {
     const pathname = usePathname();
     const { user } = useUser();
+    const router = useRouter();
 
     return (
         <aside className="hidden md:flex fixed left-0 top-0 h-screen w-64 bg-white border-r border-gray-100 flex-col z-50">
@@ -80,7 +82,10 @@ const Sidebar = () => {
                         <p className="text-sm font-bold text-slate-900 truncate">{user.name}</p>
                         <p className="text-xs text-slate-500 truncate">{user.email}</p>
                     </div>
-                    <button className="text-slate-400 group-hover:text-rose-500 transition-colors shrink-0">
+                    <button
+                        onClick={() => router.push('/signin')}
+                        className="text-slate-400 group-hover:text-rose-500 transition-colors shrink-0"
+                    >
                         <LogOut size={18} />
                     </button>
                 </div>

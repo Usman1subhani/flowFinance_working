@@ -2,12 +2,14 @@
 
 import React, { useState, useEffect } from 'react';
 import { Shield, Save, LogOut, User, Mail, Edit3, X, History, ChevronRight, Clock } from 'lucide-react';
-import { useUser } from '../../context/UserContext';
+import { useUser } from '../context/UserContext';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 
 const ProfileScreen = () => {
     // Get user from global state
     const { user, updateUser } = useUser();
+    const router = useRouter();
 
     const [isEditing, setIsEditing] = useState(false);
     const [editedName, setEditedName] = useState(user.name);
@@ -23,7 +25,7 @@ const ProfileScreen = () => {
     };
 
     const handleLogout = () => {
-        console.log('Logging out...');
+        router.push('/signin');
     };
 
     return (

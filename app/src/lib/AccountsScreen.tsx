@@ -2,9 +2,9 @@
 
 import React, { useState } from 'react';
 import { Plus } from 'lucide-react';
-import { useAccounts, Account } from '../../context/AccountContext';
-import AccountCard from '../../components/account/AccountCard';
-import NewAccountModal from '../../components/account/NewAccountModal';
+import { useAccounts, Account } from '../context/AccountContext';
+import AccountCard from '../components/account/AccountCard';
+import NewAccountModal from '../components/account/NewAccountModal';
 
 const AccountsScreen = () => {
     const { accounts, deleteAccount } = useAccounts();

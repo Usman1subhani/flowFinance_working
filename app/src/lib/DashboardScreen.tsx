@@ -1,16 +1,16 @@
 'use client';
 
 import React, { useState } from 'react';
-import DashboardHeader from '../../components/dashboard/DashboardHeader';
-import AccountCard from '../../components/dashboard/AccountCard';
-import SummaryCards from '../../components/dashboard/SummaryCards';
-import RecentTransactions from '../../components/dashboard/RecentTransactions';
-import QuickActions from '../../components/dashboard/QuickActions';
-import QuickAddModal from '../../components/dashboard/QuickAddModal';
-import CloseMonthModal, { CloseMonthConfig } from '../../components/dashboard/CloseMonthModal';
-import { useAccounts, Account } from '../../context/AccountContext';
-import { useTransactions } from '../../context/TransactionContext';
-import { useHistory } from '../../context/HistoryContext';
+import DashboardHeader from '../components/dashboard/DashboardHeader';
+import AccountCard from '../components/dashboard/AccountCard';
+import SummaryCards from '../components/dashboard/SummaryCards';
+import RecentTransactions from '../components/dashboard/RecentTransactions';
+import QuickActions from '../components/dashboard/QuickActions';
+import QuickAddModal from '../components/dashboard/QuickAddModal';
+import CloseMonthModal, { CloseMonthConfig } from '../components/dashboard/CloseMonthModal';
+import { useAccounts, Account } from '../context/AccountContext';
+import { useTransactions } from '../context/TransactionContext';
+import { useHistory } from '../context/HistoryContext';
 import { CreditCard, Wallet2 } from 'lucide-react';
 
 const DashboardScreen = () => {

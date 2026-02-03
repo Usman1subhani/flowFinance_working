@@ -1,9 +1,9 @@
 'use client';
 
 import React, { useState } from 'react';
-import { useInvestments, Investment } from '../../context/InvestmentContext';
+import { useInvestments, Investment } from '../context/InvestmentContext';
 import { Plus, TrendingUp, PieChart, DollarSign, Trash2, Edit2 } from 'lucide-react';
-import AddInvestmentModal from '../../components/investments/AddInvestmentModal';
+import AddInvestmentModal from '../components/investments/AddInvestmentModal';
 
 const InvestmentsScreen = () => {
     const { investments, totalInvested, stockTotal, mutualFundTotal, addInvestment, updateInvestment, deleteInvestment } = useInvestments();
